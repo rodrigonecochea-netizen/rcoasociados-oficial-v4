@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="description" content="RCO Living, división operativa de RCO & Asociados para mantenimiento, administración y cuidado integral de propiedades.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070a">
+<title>RCO Living | Divisiones</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#05070a;min-height:100%;font-family:Arial,sans-serif}
+.page{width:min(100%,1024px);margin:0 auto;position:relative;line-height:0;background:#05070a}
+.page>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.hotspot{position:absolute;display:block;border-radius:10px;z-index:5;line-height:normal;text-indent:-9999px;overflow:hidden;outline:none}
+.hotspot:focus-visible{box-shadow:0 0 0 4px #fff,0 0 0 8px #f47a20}
+.hotspot:active{background:rgba(244,122,32,.14)}
+/* Six approved buttons: coordinates relative to the 1024×1536 design */
+.mt{left:2.8%;top:60.85%;width:14.0%;height:2.45%}
+.ad{left:19.3%;top:60.85%;width:13.8%;height:2.45%}
+.al{left:35.8%;top:60.85%;width:13.6%;height:2.45%}
+.co{left:51.3%;top:60.85%;width:13.5%;height:2.45%}
+.in{left:67.0%;top:60.85%;width:13.2%;height:2.45%}
+.lp{left:82.6%;top:60.85%;width:14.0%;height:2.45%}
+/* Additional visible calls to action */
+.hero-maint{left:3.0%;top:23.65%;width:22.5%;height:2.95%}
+.hero-wa{left:27.1%;top:23.65%;width:14.4%;height:2.95%}
+.top-maint{left:73.0%;top:1.7%;width:23.7%;height:3.0%}
+.lang{position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:20;background:rgba(6,8,11,.82);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px;display:flex;gap:2px;backdrop-filter:blur(10px)}
+.lang button{border:0;background:transparent;color:#fff;font-weight:800;font-size:11px;padding:8px 10px;border-radius:999px}.lang button.active{background:#f47a20;color:#111}
+.notice{position:fixed;left:50%;bottom:16px;transform:translateX(-50%) translateY(120px);z-index:30;background:#111820;color:#fff;border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:12px 16px;font-size:13px;line-height:1.35;box-shadow:0 16px 45px rgba(0,0,0,.45);transition:.25s;max-width:88vw;text-align:center}.notice.show{transform:translateX(-50%) translateY(0)}
+@media(min-width:1030px){.page{box-shadow:0 0 70px rgba(0,0,0,.65)}}
+</style>
+<link rel="icon" href="logo-rco-living.png">
+</head>
+<body>
+<div class="lang"><button data-lang="pt">PT</button><button data-lang="es">ES</button><button data-lang="en">EN</button></div>
+<main class="page" aria-label="Centro de Divisiones RCO Living">
+<img src="centro-divisiones-oficial.png" alt="RCO Living, divisiones y servicios">
+<a class="hotspot top-maint" data-code="MT" data-name="Mantenimiento" aria-label="Solicitar mantenimiento">Solicitar mantenimiento</a>
+<a class="hotspot hero-maint" data-code="MT" data-name="Mantenimiento" aria-label="Solicitar mantenimiento">Solicitar mantenimiento</a>
+<a class="hotspot hero-wa" href="https://wa.me/5581998991468" aria-label="Contactar por WhatsApp">WhatsApp</a>
+<a class="hotspot mt" data-code="MT" data-name="Mantenimiento" aria-label="Solicitar servicio de mantenimiento">Mantenimiento</a>
+<a class="hotspot ad" data-code="AD" data-name="Administración" aria-label="Solicitar servicio de administración">Administración</a>
+<a class="hotspot al" data-code="AL" data-name="Alquileres" aria-label="Solicitar servicio de alquileres">Alquileres</a>
+<a class="hotspot co" data-code="CO" data-name="Construcción" aria-label="Solicitar servicio de construcción">Construcción</a>
+<a class="hotspot in" data-code="IN" data-name="Inspecciones" aria-label="Solicitar servicio de inspecciones">Inspecciones</a>
+<a class="hotspot lp" data-code="LP" data-name="Limpieza" aria-label="Solicitar servicio de limpieza">Limpieza</a>
+</main>
+<div class="notice" id="notice"></div>
+<script>
+const params=new URLSearchParams(location.search), property=params.get('propiedad');
+const names={
+ es:{MT:'Mantenimiento',AD:'Administración',AL:'Alquileres',CO:'Construcción',IN:'Inspecciones',LP:'Limpieza'},
+ pt:{MT:'Manutenção',AD:'Administração',AL:'Aluguéis',CO:'Construção',IN:'Inspeções',LP:'Limpeza'},
+ en:{MT:'Maintenance',AD:'Administration',AL:'Rentals',CO:'Construction',IN:'Inspections',LP:'Cleaning'}
+};
+function browserLang(){const l=(navigator.language||'pt').toLowerCase();return l.startsWith('pt')?'pt':l.startsWith('es')?'es':'en'}
+let lang=localStorage.getItem('rco_lang')||browserLang();
+function applyLang(l){lang=l;localStorage.setItem('rco_lang',l);document.documentElement.lang=l;document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));}
+document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));applyLang(lang);
+document.querySelectorAll('[data-code]').forEach(a=>{
+ a.href='#';
+ a.addEventListener('click',e=>{e.preventDefault();const code=a.dataset.code;const u=new URL('acceso.html',location.href);u.searchParams.set('division',code);u.searchParams.set('divisionName',names[lang][code]);if(property)u.searchParams.set('propiedad',property);location.href=u.pathname+u.search;});
+});
+</script>
+<a class="panel-access" href="login.html" aria-label="Centro de Operaciones RCO">R</a><script src="app.js"></script>
+</body></html>
