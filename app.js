@@ -1,5 +1,6 @@
 const translations={
 es:{
+skipContent:"SALTAR AL CONTENIDO",
 brandSubtitle:"GRUPO EMPRESARIAL INTERNACIONAL",navHome:"INICIO",navAbout:"NOSOTROS",navServices:"SERVICIOS",navDestinations:"DESTINOS",navContact:"CONTACTO",schedule:"AGENDAR REUNIÓN",
 heroEyebrow:"DESARROLLAMOS OPORTUNIDADES",heroLine1:"Conectamos oportunidades.",heroLine2:"Construimos confianza.",heroCopy:"Un grupo empresarial internacional que conecta personas, proyectos e inversiones mediante relaciones sólidas, alianzas estratégicas y más de dos décadas de experiencia.",knowUs:"CONOCÉ RCO & ASOCIADOS",explore:"EXPLORAR DESTINOS",trustLine:"MÁS DE 20 AÑOS GENERANDO VALOR",
 visionTitle:"VISIÓN INTERNACIONAL",visionText:"Conectamos mercados y oportunidades con aliados locales.",alliancesTitle:"ALIANZAS ESTRATÉGICAS",alliancesText:"Relaciones duraderas basadas en confianza y reputación.",projectsTitle:"DESARROLLO DE PROYECTOS",projectsText:"Acompañamiento desde la oportunidad hasta la ejecución.",integrityTitle:"INTEGRIDAD Y RESULTADOS",integrityText:"Transparencia, compromiso y acción en cada etapa.",
@@ -11,6 +12,7 @@ talk:"HABLEMOS",contactTitle:"Las mejores oportunidades comienzan con una conver
 footerText:"Conectamos personas, proyectos e inversiones mediante una red internacional basada en confianza, reputación y relaciones de largo plazo.",footerDest:"DESTINOS",footerServices:"SERVICIOS",footerContact:"CONTACTO",fInvest:"Inversiones",fProjects:"Proyectos",fAdmin:"Administración",fAlliances:"Alianzas",rights:"Todos los derechos reservados."
 },
 pt:{
+skipContent:"PULAR PARA O CONTEÚDO",
 brandSubtitle:"GRUPO EMPRESARIAL INTERNACIONAL",navHome:"INÍCIO",navAbout:"SOBRE NÓS",navServices:"SERVIÇOS",navDestinations:"DESTINOS",navContact:"CONTATO",schedule:"AGENDAR REUNIÃO",
 heroEyebrow:"DESENVOLVEMOS OPORTUNIDADES",heroLine1:"Conectamos oportunidades.",heroLine2:"Construímos confiança.",heroCopy:"Um grupo empresarial internacional que conecta pessoas, projetos e investimentos por meio de relações sólidas, alianças estratégicas e mais de duas décadas de experiência.",knowUs:"CONHEÇA A RCO & ASSOCIADOS",explore:"EXPLORAR DESTINOS",trustLine:"MAIS DE 20 ANOS GERANDO VALOR",
 visionTitle:"VISÃO INTERNACIONAL",visionText:"Conectamos mercados e oportunidades com parceiros locais.",alliancesTitle:"ALIANÇAS ESTRATÉGICAS",alliancesText:"Relações duradouras baseadas em confiança e reputação.",projectsTitle:"DESENVOLVIMENTO DE PROJETOS",projectsText:"Acompanhamento desde a oportunidade até a execução.",integrityTitle:"INTEGRIDADE E RESULTADOS",integrityText:"Transparência, compromisso e ação em cada etapa.",
@@ -22,6 +24,7 @@ talk:"VAMOS CONVERSAR",contactTitle:"As melhores oportunidades começam com uma 
 footerText:"Conectamos pessoas, projetos e investimentos por meio de uma rede internacional baseada em confiança, reputação e relações de longo prazo.",footerDest:"DESTINOS",footerServices:"SERVIÇOS",footerContact:"CONTATO",fInvest:"Investimentos",fProjects:"Projetos",fAdmin:"Administração",fAlliances:"Alianças",rights:"Todos os direitos reservados."
 },
 en:{
+skipContent:"SKIP TO CONTENT",
 brandSubtitle:"INTERNATIONAL BUSINESS GROUP",navHome:"HOME",navAbout:"ABOUT",navServices:"SERVICES",navDestinations:"DESTINATIONS",navContact:"CONTACT",schedule:"SCHEDULE A MEETING",
 heroEyebrow:"WE DEVELOP OPPORTUNITIES",heroLine1:"Connecting opportunities.",heroLine2:"Building trust.",heroCopy:"An international business group connecting people, projects and investments through strong relationships, strategic alliances and more than two decades of experience.",knowUs:"DISCOVER RCO & ASSOCIATES",explore:"EXPLORE DESTINATIONS",trustLine:"OVER 20 YEARS CREATING VALUE",
 visionTitle:"INTERNATIONAL VISION",visionText:"We connect markets and opportunities through trusted local partners.",alliancesTitle:"STRATEGIC ALLIANCES",alliancesText:"Long-term relationships built on trust and reputation.",projectsTitle:"PROJECT DEVELOPMENT",projectsText:"Support from opportunity identification through execution.",integrityTitle:"INTEGRITY AND RESULTS",integrityText:"Transparency, commitment and action at every stage.",
@@ -39,12 +42,25 @@ function setLang(lang){
  current=lang;localStorage.setItem("rco_lang",lang);document.documentElement.lang=lang;
  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(translations[lang][k])el.textContent=translations[lang][k]});
  document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
+ const waMessages={
+  es:{meeting:"Hola RCO & Asociados, quiero coordinar una reunión.",info:"Hola RCO & Asociados, quiero recibir información."},
+  pt:{meeting:"Olá RCO & Associados, gostaria de agendar uma reunião.",info:"Olá RCO & Associados, gostaria de receber informações."},
+  en:{meeting:"Hello RCO & Associates, I would like to schedule a meeting.",info:"Hello RCO & Associates, I would like more information."}
+ };
+ document.querySelectorAll("[data-wa]").forEach(link=>{link.href=`https://wa.me/5581998991468?text=${encodeURIComponent(waMessages[lang][link.dataset.wa])}`});
+ const metaDescriptions={
+  es:"Grupo empresarial internacional dedicado al desarrollo de oportunidades, alianzas estratégicas y conexión entre personas, proyectos e inversiones.",
+  pt:"Grupo empresarial internacional dedicado ao desenvolvimento de oportunidades, alianças estratégicas e conexão entre pessoas, projetos e investimentos.",
+  en:"An international business group developing opportunities, strategic alliances and connections between people, projects and investments."
+ };
+ document.querySelector('meta[name="description"]')?.setAttribute("content",metaDescriptions[lang]);
 }
 document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
 setLang(current);
 const menuToggle=document.querySelector(".menu-toggle");
 if(menuToggle)menuToggle.onclick=e=>{const nav=document.querySelector(".nav");nav.classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",nav.classList.contains("open"))};
 document.querySelectorAll(".nav a").forEach(a=>a.onclick=()=>document.querySelector(".nav")?.classList.remove("open"));
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){document.querySelector(".nav")?.classList.remove("open");menuToggle?.setAttribute("aria-expanded","false")}});
 const contactForm=document.getElementById("contactForm");
 if(contactForm)contactForm.onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);const labels={es:"Interés",pt:"Interesse",en:"Interest"};const intros={es:"Hola RCO & Asociados, quiero recibir información.",pt:"Olá RCO & Associados, gostaria de receber informações.",en:"Hello RCO & Associates, I would like more information."};const txt=[intros[current],"",f.get("name"),`WhatsApp: ${f.get("phone")}`,`Email: ${f.get("email")||"-"}`,`${labels[current]}: ${f.get("interest")}`,f.get("message")||""].join("\n");window.open(`https://wa.me/5581998991468?text=${encodeURIComponent(txt)}`,"_blank","noopener")};
 const year=document.getElementById("year");if(year)year.textContent=new Date().getFullYear();

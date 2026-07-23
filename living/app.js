@@ -13,3 +13,14 @@ if(!document.querySelector('.corporate-home')){
   corporateHome.setAttribute('aria-label','Volver a RCO & Asociados');
   document.body.appendChild(corporateHome);
 }
+const livingLanguage=localStorage.getItem('rco_lang')||((navigator.language||'pt').toLowerCase().startsWith('es')?'es':(navigator.language||'pt').toLowerCase().startsWith('en')?'en':'pt');
+const livingMessages={
+  es:'Hola RCO Living, quiero solicitar información.',
+  pt:'Olá RCO Living, gostaria de solicitar informações.',
+  en:'Hello RCO Living, I would like to request information.'
+};
+document.querySelectorAll('a[href*="wa.me/5581998991468"]').forEach(link=>{
+  if(!new URL(link.href).searchParams.has('text'))link.href=`https://wa.me/5581998991468?text=${encodeURIComponent(livingMessages[livingLanguage])}`;
+  link.target='_blank';
+  link.rel='noopener';
+});
