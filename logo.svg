@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-label="RCO & Asociados">
+  <defs>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset="0.48" stop-color="#9ea3a7"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <g font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="82" font-weight="900">
+    <text x="0" y="78" fill="url(#metal)">R</text>
+    <text x="54" y="78" fill="url(#metal)">C</text>
+    <text x="108" y="78" fill="#f26a16">O</text>
+  </g>
+  <line x1="195" y1="18" x2="195" y2="92" stroke="#d7d7d7" stroke-width="3"/>
+  <text x="218" y="57" font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#f7f7f7" letter-spacing="2.5">&amp; ASOCIADOS</text>
+  <text x="220" y="84" font-family="Arial, Helvetica, sans-serif" font-size="10.5" fill="#bdbdbd" letter-spacing="1.7">GRUPO EMPRESARIAL INTERNACIONAL</text>
+</svg>
