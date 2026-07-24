@@ -1,23 +1,33 @@
-# Informe de validación
+# RCO & Asociados MASTER — Informe de validación
 
-Fecha: 23 de julio de 2026
+Fecha: 23/07/2026
 
-## Resultado
+## Identidad preservada
 
-- `/` abre exclusivamente la web institucional de **RCO & Asociados**.
-- `/living/` abre la portada independiente de **RCO Living**.
-- `/living/login.html` carga el acceso privado y el flujo de demostración dirige a `/living/control.html`.
-- Se revisaron 13 archivos HTML y no se detectaron enlaces internos rotos.
-- Los archivos JavaScript superaron la comprobación de sintaxis.
-- El selector ES/PT/EN actualiza la navegación, los textos, la descripción SEO y los mensajes de WhatsApp.
-- El número de WhatsApp está unificado como `+55 81 99899 1468`.
-- La portada institucional y RCO Living fueron revisadas a 390 × 844 px sin desplazamiento horizontal.
-- La navegación local no produjo errores de JavaScript.
-- Se incorporaron accesibilidad de teclado, foco visible y respeto por la preferencia de movimiento reducido.
-- Se añadió marcado estructurado de organización, metadatos sociales y carga diferida de imágenes secundarias.
-- `vercel.json` está incluido; en Vercel el **Root Directory** debe ser `./`.
-- La configuración de Nginx está incluida en `nginx-rcoasociados.conf`.
+- Logo aprobado de RCO & Asociados en acero, blanco y naranja.
+- Portada corporativa con reunión, planos, casco blanco y apretón de manos.
+- Paleta institucional negro, acero y naranja.
+- Mensaje principal: “Conectamos oportunidades. Construimos confianza.”
+- RCO Living conserva su identidad y permanece como módulo independiente.
 
-## Seguridad
+## Rutas verificadas localmente
 
-El login actual de RCO Living es una demostración ejecutada en el navegador. No se deben almacenar datos sensibles hasta conectar autenticación, base de datos y almacenamiento del lado del servidor.
+- `/` — HTTP 200 — RCO & Asociados.
+- `/living/` — HTTP 200 — RCO Living.
+- `/living/login.html` — HTTP 200 — acceso privado de RCO Living OS.
+- Todas las referencias locales utilizadas por las páginas apuntan a archivos existentes.
+
+## Funciones y configuración comprobadas
+
+- Selector de idioma ES / PT / EN.
+- Navegación institucional y enlaces internos.
+- Accesos a RCO Living y solicitud de servicio.
+- WhatsApp configurado con `+55 81 99899 1468`.
+- Diseño adaptable para computadora, tablet y celular.
+- Metadatos SEO, Open Graph, `robots.txt` y `sitemap.xml`.
+- `vercel.json` válido y configuración Nginx incluida.
+- Archivos JavaScript sin errores de sintaxis.
+
+## Alcance actual
+
+El acceso privado y los datos de RCO Living siguen siendo una demostración local. No deben utilizarse para almacenar datos sensibles hasta conectar autenticación y base de datos reales.
